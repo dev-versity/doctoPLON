@@ -1,6 +1,7 @@
 import {Router}  from 'express'
 import User      from "../models/UserModel.js";
 import bcrypt from "bcryptjs";
+import login from "../controllers/UserController.js";
 
 // 1 -crypte password
 // 2 -hache password
@@ -36,8 +37,6 @@ userRouter.post('/register', async(req, res) => {
 })
 
 
-userRouter.post('/login', (req, res) => {
-
-})
+userRouter.post('/login',login )
 
 export default userRouter

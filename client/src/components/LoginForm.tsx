@@ -3,7 +3,9 @@ import {
   Form,
   Input
 }             from "antd";
+import axios from "axios";
 import React from "react";
+import toast from "react-hot-toast";
 
 
 interface DataNodeType {
@@ -40,8 +42,17 @@ const tailFormItemLayout = {
 const App: React.FC = () => {
   const [form] = Form.useForm();
 
-  const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
+  const onFinish =  async(values: any) => {
+    try {
+      const reponse = await axios.post("api/users/login", values)
+      if ( reponse.data.success ) {
+        toast.success(reponse.data.message);
+      } else {
+        toast.error(reponse.data.message);
+      }
+    } catch (err) {
+      toast.error("oh noo 😧");
+    }
   };
 
 
