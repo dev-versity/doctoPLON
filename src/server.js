@@ -1,13 +1,15 @@
-import * as path from 'path'
-
+import * as path      from 'path'
+import userRouter from "./routes/UserRoute.js";
+import mongoose       from '../config/dbConfig.js'
 import express from "express"
-const app = express() 
-
-import mongoose from '../config/dbConfig.js'
+const app = express()
+app.use(express.json())
 
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-const port=process.env.PORT 
+app.use(express.urlencoded({ extended: false }))
 
+const port=process.env.PORT 
+app.use("/api/users", userRouter)
 app.listen(port, () => console.log(`application is running on port ${port}`))
