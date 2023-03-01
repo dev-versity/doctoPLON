@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React                                   from 'react';
 import './App.css';
+import RegisterForm                            from "./components/RegisterForm";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import LoginForm                               from "./components/LoginForm";
+import { Toaster }                             from "react-hot-toast";
 
 function App() {
+
+  const router = createBrowserRouter([
+
+    { path: "/register", element: <RegisterForm/> },
+    { path: "/login", element: <LoginForm/> },
+  ]);
+
   return (
     <div className="App">
+      <Toaster/>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+
       </header>
+
+      <RouterProvider router={router}/>
+
     </div>
   );
 }
