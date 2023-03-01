@@ -1,14 +1,20 @@
 import {Router}  from 'express'
 import User      from "../models/UserModel.js";
+import bcrypt from "bcryptjs";
+
+// 1 -crypte password
+// 2 -hache password
 const userRouter = Router()
 
 userRouter.post('/register', async(req, res) => {
-  // we have the possibility to put the encryption here or in the model
+ 
 
   try {
-    // const password = req.body.password
-    // TODO: add salt and hash password from bcrypt
-    // req.body.password = hashed password
+    const password = req.body.password
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt)
+
+    req.body.password = hashedPassword;
     const newUser= new User(req.body)
     await newUser.save()
     res.status(200).json({
