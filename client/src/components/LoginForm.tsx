@@ -1,8 +1,7 @@
 import {
   Button,
   Form,
-  Input
-}             from "antd";
+  Input}from "antd";
 import axios from "axios";
 import React from "react";
 import toast from "react-hot-toast";
@@ -44,9 +43,10 @@ const App: React.FC = () => {
 
   const onFinish =  async(values: any) => {
     try {
-      const reponse = await axios.post("api/users/login", values)
+      const reponse = await axios.post("/api/users/login", values)
       if ( reponse.data.success ) {
         toast.success(reponse.data.message);
+        localStorage.setItem("token", reponse.data.data)
       } else {
         toast.error(reponse.data.message);
       }
