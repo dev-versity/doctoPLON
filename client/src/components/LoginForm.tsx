@@ -5,6 +5,7 @@ import {
 import axios from "axios";
 import React from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 interface DataNodeType {
@@ -40,13 +41,15 @@ const tailFormItemLayout = {
 
 const App: React.FC = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate()
 
   const onFinish =  async(values: any) => {
     try {
-      const reponse = await axios.post("/api/users/login", values)
+      const reponse = await axios.post("/api/users/login/", values)
       if ( reponse.data.success ) {
         toast.success(reponse.data.message);
         localStorage.setItem("token", reponse.data.data)
+        navigate("/")
       } else {
         toast.error(reponse.data.message);
       }

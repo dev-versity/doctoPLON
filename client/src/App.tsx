@@ -1,9 +1,10 @@
-import React                                   from 'react';
-import './App.css';
+import React                                   from "react";
+import "./App.css";
 import RegisterForm                            from "./components/RegisterForm";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginForm                               from "./components/LoginForm";
 import { Toaster }                             from "react-hot-toast";
+import { Home }                                from "./components/Home";
 
 function App() {
 
@@ -11,18 +12,21 @@ function App() {
 
     { path: "/register", element: <RegisterForm/> },
     { path: "/login", element: <LoginForm/> },
+    { path: "/", element: <Home/> }
   ]);
 
+
+
   return (
-    <div className="App">
-      <Toaster/>
-      <header className="App-header">
+      <div className="App">
+        <Toaster/>
+        <header className="App-header">
 
-      </header>
+        </header>
 
-      <RouterProvider router={router}/>
+        <RouterProvider router={ router }/>
 
-    </div>
+      </div>
   );
 }
 
